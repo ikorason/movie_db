@@ -59,7 +59,7 @@ export default class IndexPage extends Component<Props, State> {
   componentDidMount = async () => {
     await this.wait(1500)
     return this.setState({loaded: true}, () => {
-      const animate = animateInHomePage(250)
+      const animate = animateInHomePage(300)
       return animate.play()
     })
   }

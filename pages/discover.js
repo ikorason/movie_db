@@ -1,4 +1,5 @@
 // @flow
+/* eslint camelcase: 0 */
 import React, {Component} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -92,6 +93,7 @@ export default class DiscoverPage extends Component<Props, State> {
     isFetching: false,
     searchFieldVisible: false,
     searchTerm: '',
+    hasMore: true,
   }
 
   componentDidMount() {
@@ -113,10 +115,11 @@ export default class DiscoverPage extends Component<Props, State> {
   }
 
   handleOnScroll = () => {
+    const {hasMore} = this.state
     // after user scroll to end we want to fetch more movies and append them on screen
     // but we need to have loading indicator for ui/ux experience
     const wrappedEl = document.querySelector(`.${Container.styledComponentId}`)
-    if (isBottom(wrappedEl) && !this.state.isFetching) {
+    if (isBottom(wrappedEl) && !this.state.isFetching && hasMore) {
       // once user scrolled to bottom
       // we want to show loading component
       // in the meantime fetching more movies
@@ -135,24 +138,58 @@ export default class DiscoverPage extends Component<Props, State> {
   }
 
   fetchAddtionalMovies = async () => {
+    const {searchTerm, page} = this.state
     try {
       // wait 2000ms
       await wait(1500)
-      // then fetch addtional movies
-      const res = await axios({
-        method: 'get',
-        url: `${api.BASE_URL}${api.DISCOVER_MOVIE}`,
-        params: {
-          api_key: process.env.API_KEY,
-          language: api.LANG,
-          sort_by: api.POPULARITY_DESC,
-          include_adult: api.IS_ADULT,
-          include_video: api.HAS_VIDEO,
-          page: this.state.page,
-        },
-      })
-      const newMovies = res.data.results
-      this.setState(prevState => ({movies: prevState.movies.concat(newMovies), isFetching: !prevState.isFetching}))
+      if (searchTerm.length !== 0) {
+        // fetch additional queried movies beside initial movies that are queried
+        const res = await axios({
+          method: 'get',
+          url: `${api.BASE_URL}${api.SEARCH_MOVIES}`,
+          params: {
+            api_key: process.env.API_KEY,
+            language: api.LANG,
+            query: searchTerm,
+            include_adult: api.IS_ADULT,
+            include_video: api.HAS_VIDEO,
+            page,
+          },
+        })
+        let newMovies = []
+        newMovies = res.data.results
+        const {total_pages} = res.data
+        this.setState(
+          prevState => ({
+            movies: prevState.movies.concat(newMovies),
+            isFetching: !prevState.isFetching,
+          }),
+          () => (this.state.page === total_pages ? this.setState({hasMore: false}) : null),
+        )
+      } else if (searchTerm.length === 0) {
+        // we want to use this ajax call for normal fetch additional movies
+        // when there is no search term involves
+        // then fetch addtional movies
+        const res = await axios({
+          method: 'get',
+          url: `${api.BASE_URL}${api.DISCOVER_MOVIE}`,
+          params: {
+            api_key: process.env.API_KEY,
+            language: api.LANG,
+            sort_by: api.POPULARITY_DESC,
+            include_adult: api.IS_ADULT,
+            include_video: api.HAS_VIDEO,
+            page,
+          },
+        })
+        let newMovies = []
+        newMovies = res.data.results
+        const {total_page} = res.data
+        this.setState(
+          prevState => ({movies: prevState.movies.concat(newMovies), isFetching: !prevState.isFetching}),
+          () => (this.state.page === total_page ? this.setState({hasMore: false}) : null),
+        )
+      }
     } catch (e) {
       console.log(e)
     }
