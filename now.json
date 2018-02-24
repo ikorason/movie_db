@@ -1,0 +1,5 @@
+{
+  "env": {
+    "API_KEY": "@moviedb-api-key"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react", "plugin:flowtype/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    },
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
+  "rules": {
+    "no-console": "off",
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+    "react/no-did-mount-set-state": "off",
+    "no-underscore-dangle": ["error", {"allow": ["_clickHandler"]}],
+    "semi": 0,
+    "comma-dangle": ["error", "always-multiline"],
+    "prettier/prettier": ["error"]
+  },
+  "plugins": ["prettier", "react", "flowtype"]
+}

@@ -1,0 +1,31 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": false,
+  "jsxBracketSameLine": true,
+  "parser": "flow",
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {"parser": "json"}
+    },
+    {
+      "files": ".eslintrc",
+      "options": {"parser": "json"}
+    },
+    {
+      "files": ".babelrc",
+      "options": {"parser": "json"}
+    },
+    {
+      "files": "package.json",
+      "options": {"parser": "json"}
+    },
+    {
+      "files": "now.json",
+      "options": {"parser": "json"}
+    }
+  ]
+}
