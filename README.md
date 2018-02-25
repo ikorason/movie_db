@@ -1,6 +1,12 @@
 # Movie DB
 Movie database web application built with using [themoviedb.org](https://www.themoviedb.org/) api and nextjs framework for server side rendering(universal application)
 
+## This app is still in active development
+
+### TODO LISTS
+- [] add more functionalities, such as details view, play trailer etc.
+- [] add more tests
+
 ## Running Your Own Version
 
 ### Step 1
