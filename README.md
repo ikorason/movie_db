@@ -4,10 +4,11 @@ Movie database web application built with using [themoviedb.org](https://www.the
 ## Responsive test & Demo
 
 ### Mobile
-![demo_mobile](https://media.giphy.com/media/l7fPKbsBWfwaH7Eo2U/giphy.gif)
+![demo_mobile_1](https://media.giphy.com/media/l7fPKbsBWfwaH7Eo2U/giphy.gif)
+![demo_mobile_2](https://media.giphy.com/media/1fZpwvUHgkoEjL0dRc/giphy.gif)
 
 ### Desktop
-![]
+![demo_desktop](https://media.giphy.com/media/oFyoUSGdwocUpwqIed/giphy.gif)
 
 ### TODO LISTS
 - [ ] add more functionalities, such as details view, play trailer etc.
