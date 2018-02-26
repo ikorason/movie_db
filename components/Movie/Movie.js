@@ -1,5 +1,4 @@
 // @flow
-/* eslint no-underscore-dangle: 0 */
 import React from 'react'
 import styled from 'styled-components'
 import Router from 'next/router'
