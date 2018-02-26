@@ -7,6 +7,7 @@ import CircularProgressbar from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import media from 'components/Media'
 import {StyledArrow} from 'components/Buttons/BtnExplore'
+import Overdrive from 'react-overdrive'
 import Genre from './Genre'
 
 const POSTER_PATH = 'https://image.tmdb.org/t/p/w300'
@@ -164,7 +165,9 @@ const precisionRound = (number, precision) => {
 
 const Movie = ({movie, genres}: Props) => (
   <Wrapper>
-    <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+    <Overdrive id={movie.id}>
+      <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+    </Overdrive>
     <InfoWrapper>
       <WrapperTitle>
         <StyledMovieTitle>{movie.title}</StyledMovieTitle>
