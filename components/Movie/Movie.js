@@ -1,5 +1,4 @@
 // @flow
-/* eslint no-underscore-dangle: 0 */
 import React from 'react'
 import styled from 'styled-components'
 import Router from 'next/router'
@@ -7,6 +6,7 @@ import CircularProgressbar from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import media from 'components/Media'
 import {StyledArrow} from 'components/Buttons/BtnExplore'
+import Overdrive from 'react-overdrive'
 import Genre from './Genre'
 
 const POSTER_PATH = 'https://image.tmdb.org/t/p/w300'
@@ -164,7 +164,9 @@ const precisionRound = (number, precision) => {
 
 const Movie = ({movie, genres}: Props) => (
   <Wrapper>
-    <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+    <Overdrive id={`${movie.id}`}>
+      <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+    </Overdrive>
     <InfoWrapper>
       <WrapperTitle>
         <StyledMovieTitle>{movie.title}</StyledMovieTitle>
@@ -173,7 +175,7 @@ const Movie = ({movie, genres}: Props) => (
       <WrapperGenres>{genres.map(genre => <Genre key={genre.id} name={genre.name} />)}</WrapperGenres>
       <WrapperBottom>
         <StyledVoteAverage strokeWidth={4} percentage={precisionRound(movie.vote_average / 10 * 100, 1)} />
-        <StyledArrowMovie viewBox="0 0 7 12" onClick={() => Router.push({pathname: '/details', query: {id: movie.id}})}>
+        <StyledArrowMovie viewBox="0 0 7 12" onClick={() => Router.push(`/movie?id=${movie.id}`, `/movie/${movie.id}`)}>
           <desc>arrow right</desc>
           <defs />
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
