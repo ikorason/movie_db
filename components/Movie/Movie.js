@@ -164,7 +164,7 @@ const precisionRound = (number, precision) => {
 
 const Movie = ({movie, genres}: Props) => (
   <Wrapper>
-    <Overdrive id={movie.id}>
+    <Overdrive id={`${movie.id}`}>
       <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
     </Overdrive>
     <InfoWrapper>
@@ -175,7 +175,7 @@ const Movie = ({movie, genres}: Props) => (
       <WrapperGenres>{genres.map(genre => <Genre key={genre.id} name={genre.name} />)}</WrapperGenres>
       <WrapperBottom>
         <StyledVoteAverage strokeWidth={4} percentage={precisionRound(movie.vote_average / 10 * 100, 1)} />
-        <StyledArrowMovie viewBox="0 0 7 12" onClick={() => Router.push({pathname: '/details', query: {id: movie.id}})}>
+        <StyledArrowMovie viewBox="0 0 7 12" onClick={() => Router.push(`/movie?id=${movie.id}`, `/movie/${movie.id}`)}>
           <desc>arrow right</desc>
           <defs />
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
