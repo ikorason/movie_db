@@ -9,7 +9,7 @@
     "test": "NODE_ENV=test jest",
     "start:dev": "node server.js",
     "build": "rimraf node_modules/.cache/babel-loader && next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "flow": "flow"
   },
   "dependencies": {
