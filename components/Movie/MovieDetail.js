@@ -3,6 +3,10 @@ import React, {Fragment} from 'react'
 import styled from 'styled-components'
 import Overdrive from 'react-overdrive'
 
+const StyledContainer = styled.div`
+  grid-area: crews;
+`
+
 const POSTER_PATH = 'https://image.tmdb.org/t/p/w300'
 
 const StyledOverdrive = styled(Overdrive)`
@@ -18,6 +22,7 @@ const MovieDetail = ({movie}) => (
     <StyledOverdrive id={`${movie.id}`} duration={500}>
       <Poster src={`${POSTER_PATH}${movie.poster_path}`} />
     </StyledOverdrive>
+    <StyledContainer />
   </Fragment>
 )
 
