@@ -1,6 +1,7 @@
 // @flow
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import Router from 'next/router'
 import media from 'components/Media'
 import Layout from 'components/Layout'
 import {LoadingHomeScreen} from 'components/Loading'
@@ -37,6 +38,7 @@ export const StyledGithubIcon = styled.svg`
   justify-self: center;
   width: 1.5em;
   height: 1.5em;
+  cursor: pointer;
   g {
     fill: ${props => props.theme.main_color};
   }
@@ -76,7 +78,7 @@ export default class IndexPage extends Component<Props, State> {
       searchFieldVisible={null}>
       <Wrapper>
         <StyledTitle>Movie DB</StyledTitle>
-        <StyledGithubIcon viewBox="0 0 24 24">
+        <StyledGithubIcon onClick={() => Router.push('https://github.com/irfanabliz/movie_db')} viewBox="0 0 24 24">
           <desc>github icon</desc>
           <defs />
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
