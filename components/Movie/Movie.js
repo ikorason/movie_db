@@ -24,10 +24,15 @@ export const Wrapper = styled.div`
   `};
 `
 
-export const Poster = styled.img`
+const StyledOverdrive = styled(Overdrive)`
   grid-area: poster;
+`
+
+export const Poster = styled.img`
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  width: 100%;
+  height: 100%;
 `
 
 export const InfoWrapper = styled.div`
@@ -164,9 +169,9 @@ const precisionRound = (number, precision) => {
 
 const Movie = ({movie, genres}: Props) => (
   <Wrapper>
-    <Overdrive id={`${movie.id}`}>
+    <StyledOverdrive id={`${movie.id}`}>
       <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
-    </Overdrive>
+    </StyledOverdrive>
     <InfoWrapper>
       <WrapperTitle>
         <StyledMovieTitle>{movie.title}</StyledMovieTitle>
