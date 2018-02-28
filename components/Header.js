@@ -17,7 +17,7 @@ export const Container = styled.div`
   `};
 
   ${media.desktop`
-    grid-template-columns: 3.1em 10em 1fr 3.1em;
+    grid-template-columns: 3.8em 10em 1fr 3.8em;
   `};
 `
 

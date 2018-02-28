@@ -1,8 +1,10 @@
 /* eslint-disable */
 import React, {Fragment} from 'react'
+import Router from 'next/router'
 import styled from 'styled-components'
 import Overdrive from 'react-overdrive'
-import Casts from './Casts'
+import media from 'components/Media'
+import Cast from './Cast'
 
 const POSTER_PATH = 'https://image.tmdb.org/t/p/w300'
 
@@ -23,6 +25,10 @@ const InfoWrapper = styled.div`
   flex-flow: column wrap;
   padding: 0 0.5em;
   justify-content: flex-start;
+
+  ${media.desktop`
+    padding: 0 1em;
+  `};
 `
 
 const StyledMovieTitle = styled.p`
@@ -32,6 +38,10 @@ const StyledMovieTitle = styled.p`
   color: ${props => props.theme.main_color};
   font-style: italic;
   text-align: left;
+
+  ${media.desktop`
+    font-size: 2.5em;
+  `};
 `
 
 const StyledMovieOverview = styled(StyledMovieTitle)`
@@ -39,10 +49,20 @@ const StyledMovieOverview = styled(StyledMovieTitle)`
   font-size: 0.8em;
   font-weight: ${props => props.theme.fontWeightLight};
   flex: 1 0 auto;
+
+  ${media.desktop`
+    font-size: 1.6em;
+  `};
+`
+
+const WrapperBtn = styled.div`
+  grid-area: playTrailer;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 `
 
 const StyledPlayTrailerBtn = styled.button`
-  align-self: flex-end;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -68,10 +88,12 @@ const CastsWrapper = styled.div`
   grid-area: casts;
   display: flex;
   flex-flow: row nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
 `
 
-const MovieDetail = ({movie, credits, hasVideos}) => (
+const YOUTUBE_LINK = 'https://www.youtube.com/watch?v='
+
+const MovieDetail = ({movie, casts, hasVideos, videos}) => (
   <Fragment>
     <StyledOverdrive id={`${movie.id}`}>
       <Poster src={`${POSTER_PATH}${movie.poster_path}`} />
@@ -81,26 +103,32 @@ const MovieDetail = ({movie, credits, hasVideos}) => (
         {movie.title} ({movie.release_date})
       </StyledMovieTitle>
       <StyledMovieOverview>{movie.overview}</StyledMovieOverview>
-      <StyledPlayTrailerBtn hasVideos={hasVideos}>
+    </InfoWrapper>
+    <WrapperBtn>
+      <StyledPlayTrailerBtn
+        onClick={() => Router.push(`${YOUTUBE_LINK}${videos[0].key}`)}
+        videos={videos}
+        hasVideos={hasVideos}>
         <StyledPlayIcon viewBox="0 0 16 21">
           <desc>play icon</desc>
           <defs />
           <g
             id="Mobile"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
             fill="none"
-            fill-rule="evenodd"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <g id="Detail_View" transform="translate(-210, -379)" fill="#355C7D" stroke="#FFFFFF" stroke-width="2">
+            fillRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round">
+            <g id="Detail_View" transform="translate(-210, -379)" fill="#355C7D" stroke="#FFFFFF" strokeWidth="2">
               <polygon id="Play" points="211 380 225.99 389.226922 211 398.453844" />
             </g>
           </g>
         </StyledPlayIcon>
         <StyledText>play trailer</StyledText>
       </StyledPlayTrailerBtn>
-    </InfoWrapper>
+    </WrapperBtn>
+    <CastsWrapper>{casts.map(cast => <Cast key={cast.cast_id} cast={cast} />)}</CastsWrapper>
   </Fragment>
 )
 

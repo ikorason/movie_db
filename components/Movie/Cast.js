@@ -5,9 +5,9 @@ import styled from 'styled-components'
 const PROFILE_PATH = 'https://image.tmdb.org/t/p/w185'
 
 const Poster = styled.img`
-  flex: 0 0 auto;
+  height: 100%;
 `
 
-const Casts = ({cast}) => <Poster src={`${PROFILE_PATH}${cast.profile_path}`} />
+const Cast = ({cast}) => <Poster src={`${PROFILE_PATH}${cast.profile_path}`} />
 
-export default Casts
+export default Cast

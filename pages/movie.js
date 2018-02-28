@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import media from 'components/Media'
 import api from 'utils/api'
 import Layout from 'components/Layout'
 import MovieDetail from 'components/Movie/MovieDetail'
@@ -9,7 +10,7 @@ import MovieDetail from 'components/Movie/MovieDetail'
 type Props = {
   movie: {title: string},
   url: {pathname: string},
-  credits: {},
+  casts: [],
   videos: [],
 }
 
@@ -17,8 +18,13 @@ const Wrapper = styled.div`
   grid-area: main;
   display: grid;
   grid-template-columns: 1.3em 9.6em 1fr 1.3em;
-  grid-template-rows: 2.5em 1fr 2.5em 1fr;
-  grid-template-areas: '. . . .' '. poster info .' '. . . .';
+  grid-template-rows: 2.5em 1fr 2.5em 150px 1fr;
+  grid-template-areas: '. . . .' '. poster info .' '. playTrailer . .' '. casts casts .' '. . . .';
+
+  ${media.desktop`
+    grid-template-columns: 3.8em 15.6em 1fr 3.8em;
+    grid-row-gap: 1em;
+  `};
 `
 
 export default class Movie extends Component<Props> {
@@ -47,7 +53,7 @@ export default class Movie extends Component<Props> {
     })
     return {
       movie: res.data,
-      credits: credits.data,
+      casts: credits.data.cast,
       videos: videos.data.results,
     }
   }
@@ -64,7 +70,7 @@ export default class Movie extends Component<Props> {
   }
 
   render() {
-    const {movie, credits, videos} = this.props
+    const {movie, casts, videos} = this.props
     const {hasVideos} = this.state
     return (
       <Layout
@@ -73,7 +79,7 @@ export default class Movie extends Component<Props> {
         handleSearch={null}
         searchFieldVisible={null}>
         <Wrapper>
-          <MovieDetail movie={movie} credits={credits} videos={videos} hasVideos={hasVideos} />
+          <MovieDetail movie={movie} casts={casts} videos={videos} hasVideos={hasVideos} />
         </Wrapper>
       </Layout>
     )
