@@ -11,7 +11,7 @@ Movie database web application built with using [themoviedb.org](https://www.the
 ![demo_desktop](https://media.giphy.com/media/oFyoUSGdwocUpwqIed/giphy.gif)
 
 ### TODO LISTS
-- [ ] add more functionalities, such as details view, play trailer etc.
+- [ ] filters functionalities
 - [ ] add more tests
 
 ## Running Your Own Version
@@ -47,5 +47,3 @@ yarn start:dev
 
 ## Deployment
 check out [nextjs](https://github.com/zeit/next.js/) github repo for deployment also the secrets(aka api_key) that needs to be create in your now account and replace now.json from this existing repo, or else in production .env will fail, and application will not be reading your api_key
-
-## I'm still developing this app, any ideas welcome
